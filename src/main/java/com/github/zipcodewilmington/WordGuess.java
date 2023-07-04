@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class WordGuess {
-    String[] words = {"cat", "dog", "bird", "fish", "lizard", "snake"};
+    String[] words = {"cat", "dog", "bird", "fish", "lizard", "snake", "turtle", "hamster"};
     static String currentWord;
     static String[] guesses;
     static Boolean correctGuess;
