@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class WordGuess {
-    String[] words = {"cat", "dog", "bird", "fish"};
+    String[] words = {"cat", "dog", "bird", "fish", "lizard", "snake"};
     static String currentWord;
     static String[] guesses;
     static Boolean correctGuess;
@@ -15,9 +15,9 @@ public class WordGuess {
         Random rand = new Random();
         int index = rand.nextInt(words.length);
         currentWord = words[index];
-        System.out.println(currentWord);
+        //System.out.println(currentWord);
         correctGuess = false;
-        numOfGuesses = currentWord.length();
+        numOfGuesses = currentWord.length() + 3;
         guesses = new String[currentWord.length()];
         for(int i = 0; i<guesses.length; i++){
             guesses[i] = " _ ";
@@ -26,17 +26,14 @@ public class WordGuess {
 
     }
     public static void runGame(){
-        System.out.println("\nLet's Play Wordguess version 1.0");
-
-        while(correctGuess == false){
-            currentGuesses();
-            System.out.println("You have "+ numOfGuesses+ " tries left.");
-            captureGuess();
-            checkWinCondition();
+        System.out.println("\nLet's Play Wordguess version 2.0");
+        while (correctGuess == false) {
+                currentGuesses();
+                System.out.println("You have " + numOfGuesses + " tries left.");
+                captureGuess();
+                checkWinCondition();
 
         }
-
-
 
 
     }
@@ -55,6 +52,9 @@ public class WordGuess {
     public static void captureGuess(){
         System.out.println("Enter a single Character");
         char hold = input.nextLine().charAt(0);
+        if (hold == '-'){
+            correctGuess = true;
+        }
         for(int i = 0; i < currentWord.length(); i++){
             if(currentWord.charAt(i) == hold){
                 guesses[i] = " " + hold + " ";
@@ -71,9 +71,36 @@ public class WordGuess {
         }
         System.out.println(sb.toString());
     }
+    public static boolean playAgain(){
+        boolean runningLoop = true;
+        boolean output = false;
+        while(runningLoop){
+            System.out.println("Would you like to play again? y/n");
+            String response = input.nextLine();
+            if(response.equalsIgnoreCase("n")){
+                System.out.println("Thank you for playing!");
+                output = false;
+                runningLoop = false;
 
+            } else if (response.equalsIgnoreCase("y")) {
+                System.out.println("Starting new round!");
+                output = true;
+                runningLoop = false;
+            }
+            else {
+                System.out.println("You have input an invalid response.");
+            }
+        }
+        return output;
+    }
     public static void main(String[] args) {
-        WordGuess game = new WordGuess();
-        game.runGame();
+        boolean cont = true;
+        while(cont){
+
+            WordGuess game = new WordGuess();
+            game.runGame();
+            cont = playAgain();
+
+        }
     }
 }
