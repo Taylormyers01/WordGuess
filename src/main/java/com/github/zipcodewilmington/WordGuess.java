@@ -19,15 +19,19 @@ public class WordGuess {
         correctGuess = false;
         numOfGuesses = currentWord.length() + 3;
         guesses = new String[currentWord.length()];
+        Arrays.fill(guesses, " _ ");
+        /*
         for(int i = 0; i<guesses.length; i++){
             guesses[i] = " _ ";
         }
+
+         */
 
 
     }
     public static void runGame(){
         System.out.println("\nLet's Play Wordguess version 2.0");
-        while (correctGuess == false) {
+        while (!correctGuess) {
                 currentGuesses();
                 System.out.println("You have " + numOfGuesses + " tries left.");
                 captureGuess();
@@ -79,7 +83,7 @@ public class WordGuess {
             String response = input.nextLine();
             if(response.equalsIgnoreCase("n")){
                 System.out.println("Thank you for playing!");
-                output = false;
+                //output = false;
                 runningLoop = false;
 
             } else if (response.equalsIgnoreCase("y")) {
